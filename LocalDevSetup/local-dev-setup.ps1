@@ -8,6 +8,7 @@
 
 # Placeholder variables
 $sqlConnStringPlaceholder = "#iFlyShopContextConnString#"
+$cacheConnectionStringPlaceholder = "#cacheConnectionString#"
 
 # Output folder
 $outputFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
@@ -19,12 +20,18 @@ $templateFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 # Capture SQL DB connection string
 $sqlConnString = Read-Host -Prompt 'Enter the connection string for your SQL database'
 
+# Capture Cache ConnectionString
+$cacheConnectionString = Read-Host -Promp 'Enter the connection string for your Redis cache'
+
 # Read connection string template file
 $connStringTemplatePath = Join-Path $templateFolder 'api.connectionStrings.template'
 $connStringTemplate = Get-Content -Path $connStringTemplatePath
 
-# Replace placeholder with console input
+# Replace SQL connection placeholder with console input
 $outputContent = $connStringTemplate -replace $sqlConnStringPlaceholder, $sqlConnString
+
+# Replace cache connection placeholder with console input
+$outputContent = $outputContent -replace $cacheConnectionStringPlaceholder, $cacheConnectionString
 
 # Create file in output folder with updated template string
 $connStringOutputPath = Split-Path $MyInvocation.MyCommand.Definition -Parent
