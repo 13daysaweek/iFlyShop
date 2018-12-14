@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using System.Runtime.InteropServices;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api.Models.Configuration
@@ -26,7 +27,11 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Models.Configuration
                 .IsOptional();
 
             Property(_ => _.DateModified)
-                .IsRequired();
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+
+            Property(_ => _.DateCreated)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
         }
     }
 }

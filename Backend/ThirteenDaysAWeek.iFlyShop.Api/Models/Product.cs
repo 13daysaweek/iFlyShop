@@ -15,5 +15,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Models
         public string ProductThumbnailImagePath { get; set; }
 
         public DateTime DateModified { get; set; }
+
+        public DateTime DateCreated { get; set; }
     }
 }

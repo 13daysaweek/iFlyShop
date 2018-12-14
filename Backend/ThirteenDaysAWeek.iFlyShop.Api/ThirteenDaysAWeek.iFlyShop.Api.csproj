@@ -113,6 +113,14 @@
     <Compile Include="Migrations\201812141840069_productModelUpdate.Designer.cs">
       <DependentUpon>201812141840069_productModelUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812141850053_productDateCreated.cs" />
+    <Compile Include="Migrations\201812141850053_productDateCreated.Designer.cs">
+      <DependentUpon>201812141850053_productDateCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812141900052_productDefaultValueUpdates.cs" />
+    <Compile Include="Migrations\201812141900052_productDefaultValueUpdates.Designer.cs">
+      <DependentUpon>201812141900052_productDefaultValueUpdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configuration\ProductConfiguration.cs" />
     <Compile Include="Models\Product.cs" />
@@ -136,6 +144,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812141840069_productModelUpdate.resx">
       <DependentUpon>201812141840069_productModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812141850053_productDateCreated.resx">
+      <DependentUpon>201812141850053_productDateCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812141900052_productDefaultValueUpdates.resx">
+      <DependentUpon>201812141900052_productDefaultValueUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
