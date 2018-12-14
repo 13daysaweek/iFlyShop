@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using ThirteenDaysAWeek.iFlyShop.Api.Models;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api.Data
 {
@@ -9,6 +10,8 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.AddFromAssembly(typeof(iFlyShopContext).Assembly);
         }
+
+        public IDbSet<Product> Products { get; set; }
     }
 
 }

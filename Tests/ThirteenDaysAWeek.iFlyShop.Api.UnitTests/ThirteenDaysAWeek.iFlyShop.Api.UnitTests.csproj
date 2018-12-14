@@ -80,7 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DummyTests.cs" />
+    <Compile Include="Controllers\ProductControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +88,13 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Backend\ThirteenDaysAWeek.iFlyShop.Api\ThirteenDaysAWeek.iFlyShop.Api.csproj">
+      <Project>{189882fe-7fb7-4127-969f-3207b290e2f9}</Project>
+      <Name>ThirteenDaysAWeek.iFlyShop.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
