@@ -1,32 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Http;
-using ThirteenDaysAWeek.iFlyShop.Api.Data;
+using ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories;
 using ThirteenDaysAWeek.iFlyShop.Api.Models;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api.Controllers
 {
     public class ProductController : ApiController
     {
-        private readonly IContextFactory _contextFactory;
+        private readonly IRepository<Product> _productRepository;
 
-        public ProductController(IContextFactory contextFactory)
+        public ProductController(IRepository<Product> productRepository)
         {
-            _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
+            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
         [Route("api/product")]
         [HttpGet]
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            IEnumerable<Product> products;
-
-            using (var context = _contextFactory.CreateInstance())
-            {
-                products = await context.Products.ToListAsync();
-            }
+            var products = await _productRepository.GetAll();
 
             return products;
         }
@@ -35,12 +29,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Controllers
         [HttpGet]
         public async Task<Product> GetProductById(int productId)
         {
-            Product product = null;
-
-            using (var context = _contextFactory.CreateInstance())
-            {
-                product = await context.Products.FirstAsync(_ => _.ProductId == productId);
-            }
+            var product = await _productRepository.GetById(productId);
 
             return product;
         }
