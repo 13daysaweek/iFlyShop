@@ -9,17 +9,29 @@
 # Placeholder variables
 $sqlConnStringPlaceholder = "#iFlyShopContextConnString#"
 
+# Output folder
+$outputFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+$outputFolder = Join-Path $outputFolder '..\Backend\ThirteenDaysAWeek.iFlyShop.Api'
+
+# Template Folder
+$templateFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+
 # Capture SQL DB connection string
 $sqlConnString = Read-Host -Prompt 'Enter the connection string for your SQL database'
 
 # Read connection string template file
-$connStringTemplatePath = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-$connStringTemplatePath = Join-Path $connStringTemplatePath 'api.connectionStrings.template'
+$connStringTemplatePath = Join-Path $templateFolder 'api.connectionStrings.template'
 $connStringTemplate = Get-Content -Path $connStringTemplatePath
 
+# Replace placeholder with console input
 $outputContent = $connStringTemplate -replace $sqlConnStringPlaceholder, $sqlConnString
 
+# Create file in output folder with updated template string
 $connStringOutputPath = Split-Path $MyInvocation.MyCommand.Definition -Parent
 $connStringOutputPath = Join-Path $connStringOutputPath '..\Backend\ThirteenDaysAWeek.iFlyShop.Api\api.connectionStrings.config'
-$connStringOutputPath
 Out-File -FilePath $connStringOutputPath -InputObject $outputContent
+
+# Copy appSettings template to output folder (no values in this file yet, so just a straight copy)
+$appSettingsTemplate = Join-Path $templateFolder 'api.appSettings.template'
+$appSettingsOutputFile = Join-Path $outputFolder 'api.appSettings.config'
+Copy-Item $appSettingsTemplate $appSettingsOutputFile
