@@ -15,6 +15,8 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Caching
             {
                 throw new ArgumentException(Strings.CacheAccessor_Empty_ConnectionString_Message, nameof(cacheConnectionString));
             }
+
+            _connectionMultiplexer = ConnectionMultiplexer.Connect(cacheConnectionString);
         }
 
         public async Task<TCacheItem> GetAsync<TCacheItem>(string cacheKey)
@@ -22,7 +24,11 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Caching
             var item = default(TCacheItem);
             var database = _connectionMultiplexer.GetDatabase();
             var itemString = await database.StringGetAsync(cacheKey);
-            item = JsonConvert.DeserializeObject<TCacheItem>(itemString);
+
+            if (!string.IsNullOrWhiteSpace(itemString))
+            {
+                item = JsonConvert.DeserializeObject<TCacheItem>(itemString);
+            }
 
             return item;
         }

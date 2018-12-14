@@ -12,6 +12,8 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories
         private readonly IContextFactory _contextFactory;
         private readonly ICacheAccessor _cacheAccessor;
 
+        private const int CACHE_SECONDS = 30;
+
         public ProductRepository(IContextFactory contextFactory, ICacheAccessor cacheAccessor)
         {
             _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
@@ -20,12 +22,18 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            var models = default(IEnumerable<Product>);
+            var cacheKey = $"{nameof(Product)}:{nameof(GetAll)}";
+            var models = await _cacheAccessor.GetAsync<IEnumerable<Product>>(cacheKey);
 
-            using (var context = _contextFactory.CreateInstance())
+            if (models == null)
             {
-                models = await context.Products
-                    .ToListAsync();
+                using (var context = _contextFactory.CreateInstance())
+                {
+                    models = await context.Products
+                        .ToListAsync();
+                }
+
+                await _cacheAccessor.SetAsync(models, cacheKey, TimeSpan.FromSeconds(CACHE_SECONDS));
             }
 
             return models;
@@ -33,11 +41,17 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories
 
         public async Task<Product> GetById(int id)
         {
-            var product = default(Product);
+            var cacheKey = $"{nameof(Product)}:{nameof(GetById)}:{id}";
+            var product = await _cacheAccessor.GetAsync<Product>(cacheKey);
 
-            using (var context = _contextFactory.CreateInstance())
+            if (product == null)
             {
-                product = await context.Products.FirstOrDefaultAsync(_ => _.ProductId == id);
+                using (var context = _contextFactory.CreateInstance())
+                {
+                    product = await context.Products.FirstOrDefaultAsync(_ => _.ProductId == id);
+                }
+
+                await _cacheAccessor.SetAsync(product, cacheKey, TimeSpan.FromSeconds(CACHE_SECONDS));
             }
 
             return product;
