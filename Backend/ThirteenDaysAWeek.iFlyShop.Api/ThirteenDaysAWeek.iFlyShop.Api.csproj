@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201812131645390_product-initial-add.Designer.cs">
       <DependentUpon>201812131645390_product-initial-add.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812141840069_productModelUpdate.cs" />
+    <Compile Include="Migrations\201812141840069_productModelUpdate.Designer.cs">
+      <DependentUpon>201812141840069_productModelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configuration\ProductConfiguration.cs" />
     <Compile Include="Models\Product.cs" />
@@ -129,6 +133,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812131645390_product-initial-add.resx">
       <DependentUpon>201812131645390_product-initial-add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812141840069_productModelUpdate.resx">
+      <DependentUpon>201812141840069_productModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
