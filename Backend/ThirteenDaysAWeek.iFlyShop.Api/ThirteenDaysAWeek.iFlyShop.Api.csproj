@@ -102,6 +102,8 @@
     <Compile Include="Data\ContextFactory.cs" />
     <Compile Include="Data\IContextFactory.cs" />
     <Compile Include="Data\iFlyShopContext.cs" />
+    <Compile Include="Data\Repositories\IRepository.cs" />
+    <Compile Include="Data\Repositories\ProductRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

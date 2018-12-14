@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using ThirteenDaysAWeek.iFlyShop.Api.Data;
+using ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api
 {
@@ -13,6 +14,10 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
             builder.RegisterType<ContextFactory>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
+
+            builder.RegisterType<ProductRepository>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
     }
 }
