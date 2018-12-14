@@ -22,7 +22,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ThirteenDaysAWeek.iFlyShop.Api.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
         /// <summary>
         ///   Looks up a localized string similar to Cache connection string must not be null or empty.
         /// </summary>
-        internal static string CacheAccessor_Empty_ConnectionString_Message {
+        public static string CacheAccessor_Empty_ConnectionString_Message {
             get {
                 return ResourceManager.GetString("CacheAccessor_Empty_ConnectionString_Message", resourceCulture);
             }
