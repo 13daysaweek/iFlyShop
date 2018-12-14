@@ -1,0 +1,5 @@
+<connectionStrings>
+  <add name="iFlyShopContext"
+       connectionString="#iFlyShopContextConnString#"
+	   providerName="System.Data.SqlClient" />
+</connectionStrings>
