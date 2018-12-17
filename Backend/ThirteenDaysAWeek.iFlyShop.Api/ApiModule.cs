@@ -34,7 +34,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
 
             builder.RegisterType<TelemetryService>()
                 .AsImplementedInterfaces()
-                .InstancePerRequest()
+                .SingleInstance()
                 .WithParameter((p, c) => p.Name == "instrumentationKey",
                     (p, c) => ConfigurationManager.AppSettings["iKey"]);
         }
