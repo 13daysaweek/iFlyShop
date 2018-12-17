@@ -194,6 +194,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Telemetry\CloudRoleNameTelemetryInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationInsights.config">

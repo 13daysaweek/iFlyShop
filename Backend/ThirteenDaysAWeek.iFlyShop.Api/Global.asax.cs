@@ -3,6 +3,7 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.ApplicationInsights.Extensibility;
+using ThirteenDaysAWeek.iFlyShop.Api.Telemetry;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api
 {
@@ -10,7 +11,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
     {
         protected void Application_Start()
         {
-            TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["iKey"];
+            ConfigureAppInsights();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             var container = CreateContainer();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
@@ -22,6 +23,12 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
             containerBuilder.RegisterAssemblyModules(typeof(WebApiApplication).Assembly);
 
             return containerBuilder.Build();
+        }
+
+        private void ConfigureAppInsights()
+        {
+            TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["iKey"];
+            TelemetryConfiguration.Active.TelemetryInitializers.Add(new CloudRoleNameTelemetryInitializer());
         }
     }
 }
