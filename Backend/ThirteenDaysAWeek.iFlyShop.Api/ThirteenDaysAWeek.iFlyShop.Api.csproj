@@ -195,6 +195,10 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Telemetry\CloudRoleNameTelemetryInitializer.cs" />
+    <Compile Include="Telemetry\DependencyTracker.cs" />
+    <Compile Include="Telemetry\IDependencyTracker.cs" />
+    <Compile Include="Telemetry\ITelemetryService.cs" />
+    <Compile Include="Telemetry\TelemetryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationInsights.config">
