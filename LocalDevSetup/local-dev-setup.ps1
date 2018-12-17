@@ -9,6 +9,7 @@
 # Placeholder variables
 $sqlConnStringPlaceholder = "#iFlyShopContextConnString#"
 $cacheConnectionStringPlaceholder = "#cacheConnectionString#"
+$appInsightsiKeyPlaceholder = "#iKey#"
 
 # Output folder
 $outputFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
@@ -21,7 +22,10 @@ $templateFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $sqlConnString = Read-Host -Prompt 'Enter the connection string for your SQL database'
 
 # Capture Cache ConnectionString
-$cacheConnectionString = Read-Host -Promp 'Enter the connection string for your Redis cache'
+$cacheConnectionString = Read-Host -Prompt 'Enter the connection string for your Redis cache'
+
+# Capture App Insights iKey
+$appInsightsiKey = Read-Host -Prompt 'Enter the Instrumentation Key for your Application Insights instance'
 
 # Read connection string template file
 $connStringTemplatePath = Join-Path $templateFolder 'api.connectionStrings.template'
@@ -41,4 +45,9 @@ Out-File -FilePath $connStringOutputPath -InputObject $outputContent
 # Copy appSettings template to output folder (no values in this file yet, so just a straight copy)
 $appSettingsTemplate = Join-Path $templateFolder 'api.appSettings.template'
 $appSettingsOutputFile = Join-Path $outputFolder 'api.appSettings.config'
-Copy-Item $appSettingsTemplate $appSettingsOutputFile
+$appSettingsContent = Get-Content -Path $appSettingsTemplate
+
+$appSettingsContent = $appSettingsContent -replace $appInsightsiKeyPlaceholder, $appInsightsiKey
+
+# Copy appSettings file to output location
+Out-File -FilePath $appSettingsOutputFile -InputObject $appSettingsContent
