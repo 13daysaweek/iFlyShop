@@ -6,12 +6,14 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Telemetry
 {
     public class DependencyTracker : IDependencyTracker
     {
-        public DependencyTracker()
+        private readonly ITelemetryService _telemetryService;
+
+        public DependencyTracker(ITelemetryService telemetryService)
         {
-            
+            _telemetryService = telemetryService ?? throw new ArgumentNullException(nameof(telemetryService));
         }
 
-        public async Task<TReturnType> TrackDependencyAsync<TReturnType>(Func<TReturnType> dependencyCall, string target,
+        public async Task<TReturnType> TrackDependencyAsync<TReturnType>(Func<Task<TReturnType>> dependencyCall, string target,
             string dependencyType, string dependencyName,
             string data)
         {
@@ -22,21 +24,37 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Telemetry
 
             try
             {
-                   
+                returnVal = await dependencyCall();
+                success = true;
             }
             finally
             {
-
+                timer.Stop();
+                _telemetryService.LogDependency(target, dependencyType, dependencyName, startTime, timer.Elapsed, success, data);
             }
 
             return returnVal;
         }
 
-        public async Task TrackDependencyAsync(Action dependencyCall, string target, string dependencyType,
+        public async Task TrackDependencyAsync(Func<Task> dependencyCall, string target, string dependencyType,
             string dependencyName,
             string data)
         {
-            throw new NotImplementedException();
+            var startTime = DateTime.UtcNow;
+            var timer = Stopwatch.StartNew();
+            var success = false;
+
+            try
+            {
+                await dependencyCall();
+                success = true;
+            }
+            finally
+            {
+                timer.Stop();
+                _telemetryService.LogDependency(target, dependencyType, dependencyName, startTime, timer.Elapsed,
+                    success, data);
+            }
         }
     }
 }

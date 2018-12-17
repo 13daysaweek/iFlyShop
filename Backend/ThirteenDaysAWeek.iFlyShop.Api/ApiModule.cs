@@ -20,7 +20,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
 
             builder.RegisterType<ProductRepository>()
                 .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
+                .InstancePerRequest();
 
             builder.RegisterType<CacheAccessor>()
                 .AsImplementedInterfaces()
@@ -31,6 +31,12 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
             builder.RegisterType<DependencyTracker>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
+
+            builder.RegisterType<TelemetryService>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest()
+                .WithParameter((p, c) => p.Name == "instrumentationKey",
+                    (p, c) => ConfigurationManager.AppSettings["iKey"]);
         }
     }
 }

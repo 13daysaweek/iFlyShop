@@ -8,8 +8,17 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Telemetry
 {
     public class TelemetryService : ITelemetryService
     {
-        private readonly TelemetryClient _telemetryClient =
-            new TelemetryClient(new TelemetryConfiguration(""));
+        private readonly TelemetryClient _telemetryClient;
+
+        public TelemetryService(string instrumentationKey)
+        {
+            if (string.IsNullOrWhiteSpace(instrumentationKey))
+            {
+                throw new ArgumentException(nameof(instrumentationKey));
+            }
+
+            _telemetryClient = new TelemetryClient(new TelemetryConfiguration(instrumentationKey));
+        }
 
         public void Error(Exception exception, string message = null)
         {

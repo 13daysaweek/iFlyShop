@@ -5,10 +5,10 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Telemetry
 {
     public interface IDependencyTracker
     {
-        Task<TReturnType> TrackDependencyAsync<TReturnType>(Func<TReturnType> dependencyCall, string target,
+        Task<TReturnType> TrackDependencyAsync<TReturnType>(Func<Task<TReturnType>> dependencyCall, string target,
             string dependencyType, string dependencyName, string data);
 
-        Task TrackDependencyAsync(Action dependencyCall, string target, string dependencyType, string dependencyName,
+        Task TrackDependencyAsync(Func<Task> dependencyCall, string target, string dependencyType, string dependencyName,
             string data);
     }
 }
