@@ -26,6 +26,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Caching
 
             _connectionString = cacheConnectionString;
             _dependencyTracker = dependencyTracker ?? throw new ArgumentNullException(nameof(dependencyTracker));
+            _redisHost = _connectionString.Substring(0, _connectionString.IndexOf(",", StringComparison.Ordinal));
         }
 
         public async Task<TCacheItem> GetAsync<TCacheItem>(string cacheKey)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.Remoting.Messaging;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -47,6 +49,13 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Telemetry
             TimeSpan elapsedTime, bool success, string data)
         {
             var dependencyData = new DependencyTelemetry(dependencyType, target, dependencyName, data, startTime, elapsedTime, success.ToString(), success);
+
+            // TODO:  Need to figure out how to correlate these with the current request.  While below does get us the current operation id, it seems like what
+            // we really need is request id
+            var operationId = Activity.Current?.RootId;
+            dependencyData.Context.Operation.ParentId = operationId;
+            dependencyData.Context.Operation.Id = Guid.NewGuid().ToString();
+
             _telemetryClient.TrackDependency(dependencyData);
         }
     }
