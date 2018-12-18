@@ -258,7 +258,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ThirteenDaysAWeek.iFlyShop.Shared\ThirteenDaysAWeek.iFlyShop.Shared.csproj">
+    <ProjectReference Include="..\ThirteenDaysAWeek.iFlyShop.Shared\ThirteenDaysAWeek.iFlyShop.Shared.csproj">
       <Project>{3b5890e9-bba7-4408-bdf0-83f8ac423bea}</Project>
       <Name>ThirteenDaysAWeek.iFlyShop.Shared</Name>
     </ProjectReference>
