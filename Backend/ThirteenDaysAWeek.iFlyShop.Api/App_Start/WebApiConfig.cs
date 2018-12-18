@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using FluentValidation.WebApi;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api
 {
@@ -19,6 +17,8 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            FluentValidationModelValidatorProvider.Configure(config);
         }
     }
 }
