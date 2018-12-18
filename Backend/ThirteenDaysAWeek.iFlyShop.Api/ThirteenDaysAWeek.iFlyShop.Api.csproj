@@ -180,6 +180,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Caching\CacheAccessor.cs" />
     <Compile Include="Caching\ICacheAccessor.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Models\OrderCreateResponse.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data\ContextFactory.cs" />
     <Compile Include="Data\IContextFactory.cs" />

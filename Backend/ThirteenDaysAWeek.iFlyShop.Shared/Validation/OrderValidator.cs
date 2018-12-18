@@ -14,9 +14,6 @@ namespace ThirteenDaysAWeek.iFlyShop.Shared.Validation
             RuleFor(_ => _.Items)
                 .NotEmpty()
                 .WithMessage(ValidationMessages.OrderValidator_Items_Must_Not_Be_Empty);
-
-            RuleForEach(_ => _.Items)
-                .SetValidator(new OrderLineItemValidator());
         }
     }
 }

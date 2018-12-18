@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using FluentValidation.WebApi;
+using Newtonsoft.Json.Serialization;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api
 {
@@ -19,6 +20,9 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
             );
 
             FluentValidationModelValidatorProvider.Configure(config);
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
         }
     }
 }
