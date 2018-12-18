@@ -42,6 +42,14 @@ namespace ThirteenDaysAWeek.iFlyShop.Shared.UnitTests.Validation
             result.IsValid
                 .Should()
                 .BeFalse();
+
+            result.Errors.Count
+                .Should()
+                .Be(1);
+
+            result.Errors[0].ErrorMessage
+                .Should()
+                .Be(ValidationMessages.OrderValidator_CustomerId_Must_Be_Greater_Than_Zero);
         }
 
         private OrderLineItem GetValidOrderLineItem()
