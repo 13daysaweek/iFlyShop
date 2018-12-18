@@ -1,2 +1,4 @@
 <appSettings>
+  <add key="iKey"
+       value="#iKey#" />
 </appSettings>

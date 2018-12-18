@@ -1,43 +1,62 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using ThirteenDaysAWeek.iFlyShop.Api.Telemetry;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api.Caching
 {
     public class CacheAccessor : ICacheAccessor
     {
-        private readonly ConnectionMultiplexer _connectionMultiplexer;
+        private readonly IDependencyTracker _dependencyTracker;
+        private readonly string _redisHost;
 
-        public CacheAccessor(string cacheConnectionString)
+        private readonly Lazy<ConnectionMultiplexer> _connectionMultiplexer = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(_connectionString));
+        private static string _connectionString;
+
+        private const string CACHE_DEPENDENCY_TYPE = "Redis";
+
+        public CacheAccessor(string cacheConnectionString, IDependencyTracker dependencyTracker)
         {
             if (string.IsNullOrWhiteSpace(cacheConnectionString))
             {
                 throw new ArgumentException(Strings.CacheAccessor_Empty_ConnectionString_Message, nameof(cacheConnectionString));
             }
 
-            _connectionMultiplexer = ConnectionMultiplexer.Connect(cacheConnectionString);
+            _connectionString = cacheConnectionString;
+            _dependencyTracker = dependencyTracker ?? throw new ArgumentNullException(nameof(dependencyTracker));
+            _redisHost = _connectionString.Substring(0, _connectionString.IndexOf(",", StringComparison.Ordinal));
         }
 
         public async Task<TCacheItem> GetAsync<TCacheItem>(string cacheKey)
         {
             var item = default(TCacheItem);
-            var database = _connectionMultiplexer.GetDatabase();
-            var itemString = await database.StringGetAsync(cacheKey);
+            var database = _connectionMultiplexer.Value.GetDatabase();
 
-            if (!string.IsNullOrWhiteSpace(itemString))
+            async Task<string> StringGet() => await database.StringGetAsync(cacheKey);
+
+            var cacheItemString =
+                await _dependencyTracker.TrackDependencyAsync((Func<Task<string>>) StringGet, _redisHost, CACHE_DEPENDENCY_TYPE,
+                    "StringGetAsync", $"GET:{cacheKey}");
+
+            if (!string.IsNullOrWhiteSpace(cacheItemString))
             {
-                item = JsonConvert.DeserializeObject<TCacheItem>(itemString);
+                item = JsonConvert.DeserializeObject<TCacheItem>(cacheItemString);
             }
 
             return item;
         }
 
-        public async Task SetAsync<TCacheItem>(TCacheItem item, string cacheKey, TimeSpan duration)
+        public async Task<bool> SetAsync<TCacheItem>(TCacheItem item, string cacheKey, TimeSpan duration)
         {
+            var database = _connectionMultiplexer.Value.GetDatabase();
             var itemString = JsonConvert.SerializeObject(item);
-            var database = _connectionMultiplexer.GetDatabase();
-            await database.StringSetAsync(cacheKey, itemString, duration);
+
+            var result = await _dependencyTracker.TrackDependencyAsync(() => database.StringSetAsync(cacheKey, itemString, duration), _redisHost,
+                CACHE_DEPENDENCY_TYPE, "StringSetAsync", $"SET:{cacheKey}");
+
+            return result;
         }
     }
 }

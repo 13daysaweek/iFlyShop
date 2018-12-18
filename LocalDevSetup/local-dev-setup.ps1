@@ -9,6 +9,7 @@
 # Placeholder variables
 $sqlConnStringPlaceholder = "#iFlyShopContextConnString#"
 $cacheConnectionStringPlaceholder = "#cacheConnectionString#"
+$appInsightsiKeyPlaceholder = "#iKey#"
 
 # Output folder
 $outputFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
@@ -21,17 +22,17 @@ $templateFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $sqlConnString = Read-Host -Prompt 'Enter the connection string for your SQL database'
 
 # Capture Cache ConnectionString
-$cacheConnectionString = Read-Host -Promp 'Enter the connection string for your Redis cache'
+$cacheConnectionString = Read-Host -Prompt 'Enter the connection string for your Redis cache'
+
+# Capture App Insights iKey
+$appInsightsiKey = Read-Host -Prompt 'Enter the Instrumentation Key for your Application Insights instance'
 
 # Read connection string template file
 $connStringTemplatePath = Join-Path $templateFolder 'api.connectionStrings.template'
 $connStringTemplate = Get-Content -Path $connStringTemplatePath
 
-# Replace SQL connection placeholder with console input
-$outputContent = $connStringTemplate -replace $sqlConnStringPlaceholder, $sqlConnString
-
-# Replace cache connection placeholder with console input
-$outputContent = $outputContent -replace $cacheConnectionStringPlaceholder, $cacheConnectionString
+# Replace Placeholders
+$outputContent = $connStringTemplate.Replace($sqlConnStringPlaceholder, $sqlconnString).Replace($cacheConnectionStringPlaceholder, $cacheConnectionString)
 
 # Create file in output folder with updated template string
 $connStringOutputPath = Split-Path $MyInvocation.MyCommand.Definition -Parent
@@ -41,4 +42,9 @@ Out-File -FilePath $connStringOutputPath -InputObject $outputContent
 # Copy appSettings template to output folder (no values in this file yet, so just a straight copy)
 $appSettingsTemplate = Join-Path $templateFolder 'api.appSettings.template'
 $appSettingsOutputFile = Join-Path $outputFolder 'api.appSettings.config'
-Copy-Item $appSettingsTemplate $appSettingsOutputFile
+$appSettingsContent = Get-Content -Path $appSettingsTemplate
+
+$appSettingsContent = $appSettingsContent.Replace($appInsightsiKeyPlaceholder, $appInsightsiKey)
+
+# Copy appSettings file to output location
+Out-File -FilePath $appSettingsOutputFile -InputObject $appSettingsContent

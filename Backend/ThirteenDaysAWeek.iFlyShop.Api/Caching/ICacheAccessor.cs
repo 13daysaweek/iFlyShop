@@ -7,6 +7,6 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Caching
     {
         Task<TCacheItem> GetAsync<TCacheItem>(string cacheKey);
 
-        Task SetAsync<TCacheItem>(TCacheItem item, string cacheKey, TimeSpan duration);
+        Task<bool> SetAsync<TCacheItem>(TCacheItem item, string cacheKey, TimeSpan duration);
     }
 }

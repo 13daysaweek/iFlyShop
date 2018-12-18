@@ -4,6 +4,7 @@ using Autofac.Integration.WebApi;
 using ThirteenDaysAWeek.iFlyShop.Api.Caching;
 using ThirteenDaysAWeek.iFlyShop.Api.Data;
 using ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories;
+using ThirteenDaysAWeek.iFlyShop.Api.Telemetry;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api
 {
@@ -19,13 +20,23 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
 
             builder.RegisterType<ProductRepository>()
                 .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
+                .InstancePerRequest();
 
             builder.RegisterType<CacheAccessor>()
                 .AsImplementedInterfaces()
                 .SingleInstance()
                 .WithParameter((p, c) => p.Name == "cacheConnectionString",
                     (p, c) => ConfigurationManager.ConnectionStrings["cacheConnectionString"].ConnectionString);
+
+            builder.RegisterType<DependencyTracker>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<TelemetryService>()
+                .AsImplementedInterfaces()
+                .SingleInstance()
+                .WithParameter((p, c) => p.Name == "instrumentationKey",
+                    (p, c) => ConfigurationManager.AppSettings["iKey"]);
         }
     }
 }
