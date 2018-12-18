@@ -120,4 +120,16 @@
   <data name="CacheAccessor_Empty_ConnectionString_Message" xml:space="preserve">
     <value>Cache connection string must not be null or empty</value>
   </data>
+  <data name="OrderLineItemValidator_ProductId_Must_Be_Greater_Than_Zero" xml:space="preserve">
+    <value>ProductId must be greater than zero</value>
+  </data>
+  <data name="OrderLineItemValidator_Quantity_Must_Be_Greater_Than_Zero" xml:space="preserve">
+    <value>Quantity must be greater than zero</value>
+  </data>
+  <data name="OrderValidator_CustomerId_Must_Be_Greater_Than_Zero" xml:space="preserve">
+    <value>CustomerId must be greater than zero</value>
+  </data>
+  <data name="OrderValidator_Items_Must_Not_Be_Empty" xml:space="preserve">
+    <value>Order must contain at least one line item</value>
+  </data>
 </root>

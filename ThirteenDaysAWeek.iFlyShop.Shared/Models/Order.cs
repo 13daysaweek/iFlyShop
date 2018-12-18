@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ThirteenDaysAWeek.iFlyShop.Api.Models
+namespace ThirteenDaysAWeek.iFlyShop.Shared.Models
 {
     public class Order
     {

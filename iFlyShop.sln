@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A87F2DDA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirteenDaysAWeek.iFlyShop.Api.UnitTests", "Tests\ThirteenDaysAWeek.iFlyShop.Api.UnitTests\ThirteenDaysAWeek.iFlyShop.Api.UnitTests.csproj", "{968FFF87-307D-4E28-A0BE-401979BDA692}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirteenDaysAWeek.iFlyShop.Shared", "ThirteenDaysAWeek.iFlyShop.Shared\ThirteenDaysAWeek.iFlyShop.Shared.csproj", "{3B5890E9-BBA7-4408-BDF0-83F8AC423BEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{968FFF87-307D-4E28-A0BE-401979BDA692}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968FFF87-307D-4E28-A0BE-401979BDA692}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968FFF87-307D-4E28-A0BE-401979BDA692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B5890E9-BBA7-4408-BDF0-83F8AC423BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B5890E9-BBA7-4408-BDF0-83F8AC423BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B5890E9-BBA7-4408-BDF0-83F8AC423BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B5890E9-BBA7-4408-BDF0-83F8AC423BEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

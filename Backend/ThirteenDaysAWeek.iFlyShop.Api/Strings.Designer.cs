@@ -68,5 +68,41 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
                 return ResourceManager.GetString("CacheAccessor_Empty_ConnectionString_Message", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ProductId must be greater than zero.
+        /// </summary>
+        public static string OrderLineItemValidator_ProductId_Must_Be_Greater_Than_Zero {
+            get {
+                return ResourceManager.GetString("OrderLineItemValidator_ProductId_Must_Be_Greater_Than_Zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity must be greater than zero.
+        /// </summary>
+        public static string OrderLineItemValidator_Quantity_Must_Be_Greater_Than_Zero {
+            get {
+                return ResourceManager.GetString("OrderLineItemValidator_Quantity_Must_Be_Greater_Than_Zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomerId must be greater than zero.
+        /// </summary>
+        public static string OrderValidator_CustomerId_Must_Be_Greater_Than_Zero {
+            get {
+                return ResourceManager.GetString("OrderValidator_CustomerId_Must_Be_Greater_Than_Zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order must contain at least one line item.
+        /// </summary>
+        public static string OrderValidator_Items_Must_Not_Be_Empty {
+            get {
+                return ResourceManager.GetString("OrderValidator_Items_Must_Not_Be_Empty", resourceCulture);
+            }
+        }
     }
 }
