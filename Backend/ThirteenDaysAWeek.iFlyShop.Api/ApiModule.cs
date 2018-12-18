@@ -47,7 +47,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
             builder.RegisterType<AppConfiguration>()
                 .AsImplementedInterfaces()
                 .SingleInstance()
-                .OnActivated(_ => _.Instance.Initialize());
+                .OnActivating(_ => _.Instance.Initialize());
         }
     }
 }
