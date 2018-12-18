@@ -36,7 +36,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.UnitTests.Caching
         public void Constructor_Should_Not_Throw_ArgumentException_When_ConnectionString_Is_Not_Null()
         {
             // Arrange
-            var connectionString = _fixture.Create<string>();
+            var connectionString = "host.name,some-other-value";
             Action ctor = () => new CacheAccessor(connectionString, _mockDependencyTracker.Object);
 
             // Assert
