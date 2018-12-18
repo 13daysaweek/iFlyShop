@@ -30,7 +30,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: 'foo'
+    sourceFolder: 'LocalDevSetup'
     contents: '*.template' 
     targetFolder: $(build.artifactStagingDirectory)
     cleanTargetFolder: false # Optional
