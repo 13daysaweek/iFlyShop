@@ -28,6 +28,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: 'foo'
+    contents: '*.template' 
+    targetFolder: $(build.artifactStagingDirectory)
+    cleanTargetFolder: false # Optional
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
