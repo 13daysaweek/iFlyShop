@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\CacheAccessorTests.cs" />
+    <Compile Include="Controllers\OrderControllerTests.cs" />
     <Compile Include="Services\OrderPublisherTests.cs" />
     <Compile Include="TheoryProviders\NullAndEmptyStringProvider.cs" />
     <Compile Include="Controllers\ProductControllerTests.cs" />
