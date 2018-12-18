@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
+using AutoFixture;
 using FluentAssertions;
 using Moq;
 using ThirteenDaysAWeek.iFlyShop.Api.Controllers;
 using ThirteenDaysAWeek.iFlyShop.Api.Services;
+using ThirteenDaysAWeek.iFlyShop.Shared.Models;
 using Xunit;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api.UnitTests.Controllers
@@ -11,10 +14,15 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.UnitTests.Controllers
     {
         private readonly MockRepository _mockRepository = new MockRepository(MockBehavior.Strict);
         private readonly Mock<IOrderPublisher> _mockOrderPublisher;
+        private readonly Fixture _fixture = new Fixture();
+
+        private readonly OrderController _controller;
 
         public OrderControllerTests()
         {
             _mockOrderPublisher = _mockRepository.Create<IOrderPublisher>();
+
+            _controller = new OrderController(_mockOrderPublisher.Object);
         }
 
         [Fact]
@@ -38,6 +46,29 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.UnitTests.Controllers
             // Act + Assert
             ctor.Should()
                 .NotThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public async Task SubmitOrder_Should_Send_Order_To_Queue()
+        {
+            // Arrange
+            var order = _fixture.Create<Order>();
+
+            _mockOrderPublisher.Setup(_ => _.SubmitOrderAsync(order))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            var result = await _controller.SubmitOrder(order);
+
+            // Assert
+            _mockRepository.VerifyAll();
+
+            result.Should()
+                .NotBeNull();
+
+            result.OrderNumber
+                .Should()
+                .NotBeNullOrWhiteSpace();
         }
     }
 }

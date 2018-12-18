@@ -110,6 +110,10 @@
       <Project>{189882fe-7fb7-4127-969f-3207b290e2f9}</Project>
       <Name>ThirteenDaysAWeek.iFlyShop.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Backend\ThirteenDaysAWeek.iFlyShop.Shared\ThirteenDaysAWeek.iFlyShop.Shared.csproj">
+      <Project>{3B5890E9-BBA7-4408-BDF0-83F8AC423BEA}</Project>
+      <Name>ThirteenDaysAWeek.iFlyShop.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
