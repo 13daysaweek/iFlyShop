@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThirteenDaysAWeek.iFlyShop.Api {
+namespace ThirteenDaysAWeek.iFlyShop.Shared {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Strings {
+    public class ValidationMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal ValidationMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ThirteenDaysAWeek.iFlyShop.Api.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ThirteenDaysAWeek.iFlyShop.Shared.ValidationMessages", typeof(ValidationMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,38 @@ namespace ThirteenDaysAWeek.iFlyShop.Api {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cache connection string must not be null or empty.
+        ///   Looks up a localized string similar to ProductId must be greater than zero.
         /// </summary>
-        public static string CacheAccessor_Empty_ConnectionString_Message {
+        public static string OrderLineItemValidator_ProductId_Must_Be_Greater_Than_Zero {
             get {
-                return ResourceManager.GetString("CacheAccessor_Empty_ConnectionString_Message", resourceCulture);
+                return ResourceManager.GetString("OrderLineItemValidator_ProductId_Must_Be_Greater_Than_Zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity must be greater than zero.
+        /// </summary>
+        public static string OrderLineItemValidator_Quantity_Must_Be_Greater_Than_Zero {
+            get {
+                return ResourceManager.GetString("OrderLineItemValidator_Quantity_Must_Be_Greater_Than_Zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomerId must be greater than zero.
+        /// </summary>
+        public static string OrderValidator_CustomerId_Must_Be_Greater_Than_Zero {
+            get {
+                return ResourceManager.GetString("OrderValidator_CustomerId_Must_Be_Greater_Than_Zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order must contain at least one line item.
+        /// </summary>
+        public static string OrderValidator_Items_Must_Not_Be_Empty {
+            get {
+                return ResourceManager.GetString("OrderValidator_Items_Must_Not_Be_Empty", resourceCulture);
             }
         }
     }
