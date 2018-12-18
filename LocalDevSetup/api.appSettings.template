@@ -1,4 +1,6 @@
 <appSettings>
   <add key="iKey"
        value="#iKey#" />
+  <add key="orderQueueName"
+       value="#orderQueueName#" />
 </appSettings>
