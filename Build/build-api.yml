@@ -19,14 +19,7 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: 'LocalDevSetup'
-    contents: '*.template' 
-    targetFolder: $(build.artifactStagingDirectory)
-    cleanTargetFolder: false # Optional    
+    restoreSolution: '$(solution)' 
 
 - task: VSBuild@1
   inputs:
