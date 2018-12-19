@@ -3,5 +3,7 @@
        connectionString="#iFlyShopContextConnString#"
 	   providerName="System.Data.SqlClient" />
   <add name="cacheConnectionString"
-       connectionString="#cacheConnectionString#" />  
+       connectionString="#cacheConnectionString#" />
+  <add name="storageConnectionString"
+       connectionString="#storageConnectionString#" />
 </connectionStrings>

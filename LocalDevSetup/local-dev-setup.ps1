@@ -9,7 +9,10 @@
 # Placeholder variables
 $sqlConnStringPlaceholder = "#iFlyShopContextConnString#"
 $cacheConnectionStringPlaceholder = "#cacheConnectionString#"
+$storageAccountPlaceholder = "#storageConnectionString#"
+
 $appInsightsiKeyPlaceholder = "#iKey#"
+$orderQueueNamePlaceholder = "#orderQueueName#"
 
 # Output folder
 $outputFolder = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
@@ -24,15 +27,21 @@ $sqlConnString = Read-Host -Prompt 'Enter the connection string for your SQL dat
 # Capture Cache ConnectionString
 $cacheConnectionString = Read-Host -Prompt 'Enter the connection string for your Redis cache'
 
+# Capture Storage Connection String
+$storageAccountConnectionString = Read-Host -Prompt 'Enter the connection string for your storage account'
+
 # Capture App Insights iKey
 $appInsightsiKey = Read-Host -Prompt 'Enter the Instrumentation Key for your Application Insights instance'
+
+# Capture the order queue name
+$orderQueueName = Read-Host -Prompt 'Enther the queue name for orders'
 
 # Read connection string template file
 $connStringTemplatePath = Join-Path $templateFolder 'api.connectionStrings.template'
 $connStringTemplate = Get-Content -Path $connStringTemplatePath
 
 # Replace Placeholders
-$outputContent = $connStringTemplate.Replace($sqlConnStringPlaceholder, $sqlconnString).Replace($cacheConnectionStringPlaceholder, $cacheConnectionString)
+$outputContent = $connStringTemplate.Replace($sqlConnStringPlaceholder, $sqlconnString).Replace($cacheConnectionStringPlaceholder, $cacheConnectionString).Replace($storageAccountPlaceholder, $storageAccountConnectionString)
 
 # Create file in output folder with updated template string
 $connStringOutputPath = Split-Path $MyInvocation.MyCommand.Definition -Parent
@@ -44,7 +53,7 @@ $appSettingsTemplate = Join-Path $templateFolder 'api.appSettings.template'
 $appSettingsOutputFile = Join-Path $outputFolder 'api.appSettings.config'
 $appSettingsContent = Get-Content -Path $appSettingsTemplate
 
-$appSettingsContent = $appSettingsContent.Replace($appInsightsiKeyPlaceholder, $appInsightsiKey)
+$appSettingsContent = $appSettingsContent.Replace($appInsightsiKeyPlaceholder, $appInsightsiKey).Replace($orderQueueNamePlaceholder, $orderQueueName)
 
 # Copy appSettings file to output location
 Out-File -FilePath $appSettingsOutputFile -InputObject $appSettingsContent
