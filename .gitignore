@@ -261,5 +261,5 @@ __pycache__/
 *.pyc
 
 # External local config settings
-api.appSettings.config
-api.connectionStrings.config
+api.appSettings.local
+api.connectionStrings.local

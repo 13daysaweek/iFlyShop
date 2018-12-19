@@ -45,12 +45,12 @@ $outputContent = $connStringTemplate.Replace($sqlConnStringPlaceholder, $sqlconn
 
 # Create file in output folder with updated template string
 $connStringOutputPath = Split-Path $MyInvocation.MyCommand.Definition -Parent
-$connStringOutputPath = Join-Path $connStringOutputPath '..\Backend\ThirteenDaysAWeek.iFlyShop.Api\api.connectionStrings.config'
+$connStringOutputPath = Join-Path $connStringOutputPath '..\Backend\ThirteenDaysAWeek.iFlyShop.Api\api.connectionStrings.local'
 Out-File -FilePath $connStringOutputPath -InputObject $outputContent
 
 # Copy appSettings template to output folder (no values in this file yet, so just a straight copy)
 $appSettingsTemplate = Join-Path $templateFolder 'api.appSettings.template'
-$appSettingsOutputFile = Join-Path $outputFolder 'api.appSettings.config'
+$appSettingsOutputFile = Join-Path $outputFolder 'api.appSettings.local'
 $appSettingsContent = Get-Content -Path $appSettingsTemplate
 
 $appSettingsContent = $appSettingsContent.Replace($appInsightsiKeyPlaceholder, $appInsightsiKey).Replace($orderQueueNamePlaceholder, $orderQueueName)

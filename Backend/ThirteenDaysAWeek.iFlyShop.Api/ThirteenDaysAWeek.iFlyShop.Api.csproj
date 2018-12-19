@@ -250,6 +250,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <Content Include="api.appSettings.config" />
+    <Content Include="api.connectionStrings.config" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
