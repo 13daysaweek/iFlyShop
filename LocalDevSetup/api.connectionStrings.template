@@ -1,9 +1,0 @@
-<connectionStrings>
-  <add name="iFlyShopContext"
-       connectionString="#iFlyShopContextConnString#"
-	   providerName="System.Data.SqlClient" />
-  <add name="cacheConnectionString"
-       connectionString="#cacheConnectionString#" />
-  <add name="storageConnectionString"
-       connectionString="#storageConnectionString#" />
-</connectionStrings>
