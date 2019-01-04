@@ -24,7 +24,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Functions
         {
             log.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
             var order = JsonConvert.DeserializeObject<Order>(myQueueItem);
-            var orderHeaderheader = new OrderHeader
+            var orderHeader = new OrderHeader
             {
                 CustomerId = order.CustomerId,
                 Id = Guid.NewGuid().ToString(),
@@ -32,9 +32,15 @@ namespace ThirteenDaysAWeek.iFlyShop.Functions
                 OrderNumber = order.OrderNumber
             };
 
-            var items = order.Items.Select(_ => new LineItem {ProductId = _.ProductId, Quantity = _.Quantity});
+            var items = order.Items.Select(_ => new LineItem
+            {
+                ProductId = _.ProductId,
+                Quantity = _.Quantity,
+                OrderNumber = orderHeader.OrderNumber,
+                Id = Guid.NewGuid().ToString()
+            });
 
-            header = orderHeaderheader;
+            header = orderHeader;
 
             foreach (var item in items)
             {
