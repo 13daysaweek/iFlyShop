@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -11,6 +13,9 @@ namespace ThirteenDaysAWeek.iFlyShop.Functions
 {
     public static class OrderProcessing
     {
+        private static string _iKey = TelemetryConfiguration.Active.InstrumentationKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY", EnvironmentVariableTarget.Process);
+        private static TelemetryClient _telemetryClient = new TelemetryClient() { InstrumentationKey = _iKey };
+
         [FunctionName("OrderProcessing")]
         public static void Run([QueueTrigger("orders", Connection = "ordersQueueConnectionString")]string myQueueItem, 
             [CosmosDB(
@@ -20,8 +25,12 @@ namespace ThirteenDaysAWeek.iFlyShop.Functions
             [CosmosDB(databaseName: "order-processing",
                 collectionName: "order-items",
                 ConnectionStringSetting = "orderProcessingConnectionString")] ICollector<LineItem> lineItems,
-            ILogger log)
+            ILogger log,
+            ExecutionContext context)
         {
+            _telemetryClient.Context.Operation.Id = context.InvocationId.ToString();
+            _telemetryClient.Context.Operation.Name = nameof(OrderProcessing);
+
             log.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
             var order = JsonConvert.DeserializeObject<Order>(myQueueItem);
             var orderHeader = new OrderHeader
@@ -46,6 +55,13 @@ namespace ThirteenDaysAWeek.iFlyShop.Functions
             {
                 lineItems.Add(item);
             }
+
+            var args = new Dictionary<string, string>
+            {
+                {"customerId", order.CustomerId.ToString()},
+                {"orderNumber", order.OrderNumber}
+            };
+            _telemetryClient.TrackEvent(Constants.Events.OrderProcessedEvent, args);
         }
     }
 }

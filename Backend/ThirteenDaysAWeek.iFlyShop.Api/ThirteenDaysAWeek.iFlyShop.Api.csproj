@@ -200,6 +200,7 @@
     <Compile Include="Caching\ICacheAccessor.cs" />
     <Compile Include="Configuration\AppConfiguration.cs" />
     <Compile Include="Configuration\IAppConfiguration.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Models\OrderCreateResponse.cs" />
