@@ -48,6 +48,10 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
                 .AsImplementedInterfaces()
                 .SingleInstance()
                 .OnActivating(_ => _.Instance.Initialize());
+
+            builder.RegisterType<OrderNumberService>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
         }
     }
 }
