@@ -11,10 +11,12 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Controllers
     public class OrderController : ApiController
     {
         private readonly IOrderPublisher _orderPublisher;
+        private readonly IOrderNumberService _orderNumberService;
 
-        public OrderController(IOrderPublisher orderPublisher)
+        public OrderController(IOrderPublisher orderPublisher, IOrderNumberService orderNumberService)
         {
             _orderPublisher = orderPublisher ?? throw new ArgumentNullException(nameof(orderPublisher));
+            _orderNumberService = orderNumberService ?? throw new ArgumentNullException(nameof(orderNumberService));
         }
 
         [HttpPost]
@@ -22,7 +24,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Controllers
         [ValidateModelState]
         public async Task<OrderCreateResponse> SubmitOrder(Order order)
         {
-            order.OrderNumber = "test"; // Change
+            order.OrderNumber = _orderNumberService.GetNewOrderNumber(8);
             order.OrderDate = DateTime.UtcNow;
             await _orderPublisher.SubmitOrderAsync(order);
 
