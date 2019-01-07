@@ -3,6 +3,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppConfigService } from '../services/app-config.service';
+import { ProductListComponent } from './product-list/product-list.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -12,7 +13,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule
