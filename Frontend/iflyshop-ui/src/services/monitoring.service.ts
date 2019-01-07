@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AppInsights } from 'applicationinsights-js';
+import { AppConfigService } from '../services/app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonitoringService {
-  private config: Microsoft.ApplicationInsights.IConfig = {
-
-  };
+  private config: Microsoft.ApplicationInsights.IConfig;
 
   logPageView(name?: string,
     url?: string,
@@ -29,7 +28,12 @@ export class MonitoringService {
     AppInsights.trackException(e);
   }
 
-  constructor() {
+  constructor(private appConfig: AppConfigService) {
+    const iKey = appConfig.config.instrumentationKey;
+    this.config = {
+      instrumentationKey: iKey
+    };
+
     if (!AppInsights.config) {
       AppInsights.downloadAndSetup(this.config);
     }
