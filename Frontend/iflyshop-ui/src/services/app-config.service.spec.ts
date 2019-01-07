@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppConfigServiceService } from './app-config-service.service';
+import { AppConfigServiceService } from './app-config.service';
 
 describe('AppConfigServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

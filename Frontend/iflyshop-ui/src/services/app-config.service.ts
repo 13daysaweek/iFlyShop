@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AppConfigServiceService {
+export class AppConfigService {
   private appConfig;
 
   loadAppConfig() {
