@@ -30,7 +30,7 @@ export class MonitoringService {
 
   constructor(private appConfig: AppConfigService) {
     const iKey = appConfig.config.instrumentationKey;
-    console.log(`iKey is ${iKey}`);
+
     this.config = {
       instrumentationKey: iKey
     };
