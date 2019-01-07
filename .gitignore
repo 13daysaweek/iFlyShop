@@ -263,3 +263,4 @@ __pycache__/
 # External local config settings
 api.appSettings.local
 api.connectionStrings.local
+app-config.json
