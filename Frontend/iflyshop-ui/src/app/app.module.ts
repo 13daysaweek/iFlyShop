@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { AppConfigService } from '../services/app-config.service';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
+import { OrderComponent } from './order/order.component';
+
+import { AppRoutingModule } from './app-routing.module';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -18,12 +21,14 @@ const appInitializerFn = (appConfig: AppConfigService) => {
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductComponent
+    ProductComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [
     AppConfigService,
