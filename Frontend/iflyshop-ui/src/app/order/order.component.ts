@@ -27,6 +27,7 @@ export class OrderComponent implements OnInit {
       .subscribe(_ => {
         this.message = `You order was successfully placed, your order number is ${_.orderNumber}`;
         this.monitoringService.logEvent('UI.OrderSubmitted', { 'orderNumber': _.orderNumber });
+        this.shoppingCartService.clearCart();
       });
   }
 

@@ -19,6 +19,10 @@ export class ShoppingCartService {
     return cart;
   }
 
+  clearCart(): void {
+    localStorage.removeItem(this.cartKey);
+  }
+
   addItem(product: Product, quantity: number): void {
     let cartString = localStorage.getItem(this.cartKey);
     let cart: ShoppingCart;
