@@ -23,25 +23,6 @@ export class ProductComponent implements OnInit {
 
   addItemToCart(): void {
     this.shoppingCartService.addItem(this.product, this.quantity);
-    // const cartKey = 'cart';
-    // let cartString = localStorage.getItem(cartKey);
-    // let cart: ShoppingCart;
-
-    // const item = new CartItem();
-    // item.productId = this.product.productId;
-    // item.quantity = this.quantity;
-    // item.unitPrice = this.product.unitPrice;
-
-    // if (cartString === null) {
-    //   cart = new ShoppingCart();
-    //   cart.items.push(item);
-    // } else {
-    //   cart = JSON.parse(cartString);
-    //   cart.items.push(item);
-    // }
-
-    // cartString = JSON.stringify(cart);
-    // localStorage.setItem(cartKey, cartString);
   }
 
   constructor(private monitoringService: MonitoringService,
