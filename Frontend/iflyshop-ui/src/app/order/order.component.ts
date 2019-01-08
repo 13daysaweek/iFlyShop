@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { MonitoringService } from '../../services/monitoring.service';
+import { OrderService } from '../../services/order.service';
 
 import { ShoppingCart } from '../../models/shoppingCart';
 
@@ -13,6 +14,7 @@ import { ShoppingCart } from '../../models/shoppingCart';
 export class OrderComponent implements OnInit {
 
   cart: ShoppingCart;
+  message: string;
 
   get total(): number {
     const total = this.cart.items.map(_ => _.quantity * _.unitPrice).reduce((p, n) => p + n);
@@ -21,14 +23,17 @@ export class OrderComponent implements OnInit {
   }
 
   placeOrder(): void {
-
+    this.orderService.placeOrder(this.cart)
+      .subscribe(_ => {
+        this.message = `You order was successfully placed, your order number is ${_.orderNumber}`;
+      });
   }
 
   constructor(private shoppingCartService: ShoppingCartService,
-    private monitoringService: MonitoringService) { }
+    private monitoringService: MonitoringService,
+    private orderService: OrderService) { }
 
   ngOnInit() {
     this.cart = this.shoppingCartService.getCart();
-    console.log(this.cart.total);
   }
 }
