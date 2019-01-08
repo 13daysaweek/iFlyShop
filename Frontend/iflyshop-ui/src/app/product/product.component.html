@@ -1,0 +1,9 @@
+<div>
+  <div>{{product.name}}</div>
+  <div>{{product.unitPrice}}</div>
+  <label>Quantity:
+    <input [(ngModel)]="quantity" />
+  </label>
+  <button (click)="addItemToCart()">Add to Cart</button>
+  <button (click)="removeItemFromCart()">Remove from Cart</button>
+</div>
