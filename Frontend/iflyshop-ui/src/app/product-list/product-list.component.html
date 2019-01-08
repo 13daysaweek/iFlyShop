@@ -1,5 +1,5 @@
 <div>
   <ul *ngFor='let product of products'>
-    <li>{{product.name}} {{product.unitPrice | currency}}</li>
+    <app-product [product]="product"></app-product>
   </ul>
 </div>
