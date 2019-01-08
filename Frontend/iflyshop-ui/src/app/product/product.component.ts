@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { MonitoringService } from '../../services/monitoring.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
+
 import { Product } from '../../models/product';
 import { CartItem } from '../../models/cartItem';
 import { ShoppingCart } from '../../models/shoppingCart';
@@ -15,29 +17,35 @@ export class ProductComponent implements OnInit {
 
   quantity: number;
 
-  addItemToCart(): void {
-    const cartKey = 'cart';
-    let cartString = localStorage.getItem(cartKey);
-    let cart: ShoppingCart;
-
-    const item = new CartItem();
-    item.productId = this.product.productId;
-    item.quantity = this.quantity;
-    item.unitPrice = this.product.unitPrice;
-
-    if (cartString === null) {
-      cart = new ShoppingCart();
-      cart.items.push(item);
-    } else {
-      cart = JSON.parse(cartString);
-      cart.items.push(item);
-    }
-
-    cartString = JSON.stringify(cart);
-    localStorage.setItem(cartKey, cartString);
+  removeItemFromCart(): void {
+    this.shoppingCartService.removeItem(this.product.productId);
   }
 
-  constructor(private monitoringService: MonitoringService) { }
+  addItemToCart(): void {
+    this.shoppingCartService.addItem(this.product, this.quantity);
+    // const cartKey = 'cart';
+    // let cartString = localStorage.getItem(cartKey);
+    // let cart: ShoppingCart;
+
+    // const item = new CartItem();
+    // item.productId = this.product.productId;
+    // item.quantity = this.quantity;
+    // item.unitPrice = this.product.unitPrice;
+
+    // if (cartString === null) {
+    //   cart = new ShoppingCart();
+    //   cart.items.push(item);
+    // } else {
+    //   cart = JSON.parse(cartString);
+    //   cart.items.push(item);
+    // }
+
+    // cartString = JSON.stringify(cart);
+    // localStorage.setItem(cartKey, cartString);
+  }
+
+  constructor(private monitoringService: MonitoringService,
+    private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {
   }
