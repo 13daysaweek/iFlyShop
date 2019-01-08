@@ -1,3 +1,20 @@
-<p>
-  order works!
-</p>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+      </tr>
+    </thead>
+    <tr *ngFor='let item of cart.items'>
+      <td>{{item.name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.unitPrice | currency}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">Total</td>
+      <td>{{total | currency}}</td>
+    </tr>
+  </table>
+</div>

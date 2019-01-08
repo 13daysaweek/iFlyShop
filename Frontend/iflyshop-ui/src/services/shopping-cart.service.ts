@@ -12,6 +12,13 @@ import { MonitoringService } from './monitoring.service';
 export class ShoppingCartService {
   private cartKey = 'cart';
 
+  getCart(): ShoppingCart {
+    const cartString = localStorage.getItem(this.cartKey);
+    const cart = JSON.parse(cartString);
+
+    return cart;
+  }
+
   addItem(product: Product, quantity: number): void {
     let cartString = localStorage.getItem(this.cartKey);
     let cart: ShoppingCart;
@@ -20,6 +27,7 @@ export class ShoppingCartService {
     item.productId = product.productId;
     item.quantity = quantity;
     item.unitPrice = product.unitPrice;
+    item.name = product.name;
 
     if (cartString === null) {
       cart = new ShoppingCart();

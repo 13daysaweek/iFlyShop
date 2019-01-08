@@ -9,6 +9,12 @@ export class ShoppingCart {
         return total;
     }
 
+    get total(): number {
+        const total = this.items.map(_ => _.quantity * _.unitPrice).reduce((p, n) => p + n);
+
+        return total;
+    }
+
     constructor() {
         this.items = [];
     }
