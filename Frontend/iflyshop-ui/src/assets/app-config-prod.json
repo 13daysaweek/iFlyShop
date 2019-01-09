@@ -1,4 +1,4 @@
 {
     "instrumentationKey": "__instrumentationKey__",
-    "baseApiUri": "__baseApiUri__"
+    "apiBaseUri": "__apiBaseUri__"
 }
