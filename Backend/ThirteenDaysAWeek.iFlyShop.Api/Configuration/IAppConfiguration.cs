@@ -6,6 +6,12 @@
 
         string StorageConnectionString { get; }
 
+        string CorsAllowedHosts { get; }
+
+        string CorsAllowedHeaders { get; }
+
+        string CorsAllowedMethods { get; }
+
         void Initialize();
     }
 }

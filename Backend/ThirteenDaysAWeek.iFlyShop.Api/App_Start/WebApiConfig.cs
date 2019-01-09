@@ -1,7 +1,9 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
+using Autofac;
 using FluentValidation.WebApi;
 using Newtonsoft.Json.Serialization;
+using ThirteenDaysAWeek.iFlyShop.Api.Configuration;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api
 {
@@ -25,7 +27,10 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
 
-            var cors = new EnableCorsAttribute("*", "*", "*"); // TODO:  Move to config
+            var appConfig = WebApiApplication.AppContainer.Resolve<IAppConfiguration>();
+
+            var cors = new EnableCorsAttribute(appConfig.CorsAllowedHosts, appConfig.CorsAllowedHeaders,
+                appConfig.CorsAllowedMethods);
             config.EnableCors(cors);
         }
     }

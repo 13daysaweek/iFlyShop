@@ -9,12 +9,14 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        public static IContainer AppContainer { get; private set; }
+
         protected void Application_Start()
         {
+            AppContainer = CreateContainer();
             ConfigureAppInsights();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            var container = CreateContainer();
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(AppContainer);
         }
 
         private IContainer CreateContainer()
