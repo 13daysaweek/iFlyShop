@@ -12,7 +12,7 @@ export class AppConfigService {
   loadAppConfig() {
     const http = this.injector.get(HttpClient);
 
-    return http.get(environment.confileFileUri)
+    return http.get(environment.configFileUri)
       .toPromise()
       .then(data => {
         this.appConfig = data;
