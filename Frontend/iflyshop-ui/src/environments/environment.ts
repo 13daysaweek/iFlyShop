@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  configFileUri: '/app-config.json'
+  configFileUri: '/assets/app-config.json'
 };
 
 /*
