@@ -1,9 +1,9 @@
 <div>
   <div>{{product.name}}</div>
-  <div>{{product.unitPrice}}</div>
+  <div>{{product.unitPrice | currency }}</div>
   <label>Quantity:
-    <input [(ngModel)]="quantity" />
+    <input [(ngModel)]="quantity" class="form-control" />
   </label>
-  <button (click)="addItemToCart()">Add to Cart</button>
-  <button (click)="removeItemFromCart()">Remove from Cart</button>
+  <button (click)="addItemToCart()" class="btn btn-primary">Add to Cart</button>
+  <button (click)="removeItemFromCart()" class="btn btn-secondary">Remove from Cart</button>
 </div>

@@ -37,6 +37,14 @@ export class MonitoringService {
 
     if (!AppInsights.config) {
       AppInsights.downloadAndSetup(this.config);
+      AppInsights.config.samplingPercentage = 100;
+      AppInsights.queue.push(() => {
+        AppInsights.context.addTelemetryInitializer((envelope: Microsoft.ApplicationInsights.IEnvelope) => {
+          const ti = envelope.data.baseData;
+          ti.properties = ti.properties || {};
+          ti.properties['cloud_RoleName'] = 'iFlyShop UI';
+        });
+      });
     }
   }
 }
