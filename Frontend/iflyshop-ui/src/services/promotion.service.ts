@@ -12,12 +12,12 @@ import { AppConfigService } from '../services/app-config.service';
 export class PromotionService {
   private apiUri: string;
 
-  getPromotions(): Observable<Promotion> {
-    return this.http.get<Promotion>(this.apiUri);
+  getPromotions(): Observable<Promotion[]> {
+    return this.http.get<Promotion[]>(this.apiUri);
   }
 
   constructor(private http: HttpClient,
     private appConfig: AppConfigService) {
-      this.apiUri = `${appConfig.config.apiBaseUri}/promotion/1`;
+      this.apiUri = `${appConfig.config.apiBaseUri}/promotion/`;
     }
 }

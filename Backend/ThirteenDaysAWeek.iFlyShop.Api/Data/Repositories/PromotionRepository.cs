@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using ThirteenDaysAWeek.iFlyShop.Api.Models;
 
@@ -17,11 +18,16 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories
 
         public async Task<IEnumerable<Promotion>> GetAll()
         {
-            var promotions = default(IEnumerable<Promotion>);
+            IEnumerable<Promotion> promotions;
 
             using (var context = _contextFactory.CreateInstance())
             {
                 promotions = await context.Promotions.ToListAsync();
+
+                if (!promotions.Any())
+                {
+                    throw new ApplicationException("No promotions found");
+                }
             }
 
             return promotions;
@@ -29,7 +35,7 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data.Repositories
 
         public async Task<Promotion> GetById(int id)
         {
-            var promotion = default(Promotion);
+            Promotion promotion;
 
             using (var context = _contextFactory.CreateInstance())
             {
