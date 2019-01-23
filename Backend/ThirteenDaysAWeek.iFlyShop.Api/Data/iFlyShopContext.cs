@@ -12,6 +12,8 @@ namespace ThirteenDaysAWeek.iFlyShop.Api.Data
         }
 
         public IDbSet<Product> Products { get; set; }
+
+        public IDbSet<Promotion> Promotions { get; set; }
     }
 
 }

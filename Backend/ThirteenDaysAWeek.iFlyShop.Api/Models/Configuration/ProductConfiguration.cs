@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Runtime.InteropServices;
 
 namespace ThirteenDaysAWeek.iFlyShop.Api.Models.Configuration
 {

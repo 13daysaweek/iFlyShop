@@ -10,6 +10,7 @@ import { ProductComponent } from './product/product.component';
 import { OrderComponent } from './order/order.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { PromotionComponent } from './promotion/promotion.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -22,7 +23,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     AppComponent,
     ProductListComponent,
     ProductComponent,
-    OrderComponent
+    OrderComponent,
+    PromotionComponent
   ],
   imports: [
     BrowserModule,
