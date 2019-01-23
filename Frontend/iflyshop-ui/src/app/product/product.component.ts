@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
 
   addItemToCart(): void {
     this.shoppingCartService.addItem(this.product, this.quantity);
+    this.quantity = 0;
   }
 
   constructor(private monitoringService: MonitoringService,
