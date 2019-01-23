@@ -24,6 +24,10 @@ namespace ThirteenDaysAWeek.iFlyShop.Api
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
+            builder.RegisterType<PromotionRepository>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
             builder.RegisterType<CacheAccessor>()
                 .AsImplementedInterfaces()
                 .SingleInstance()
