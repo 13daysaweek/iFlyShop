@@ -212,7 +212,12 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Data\Repositories\PromotionRepository.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Migrations\201901231449360_Promotions.cs" />
+    <Compile Include="Migrations\201901231449360_Promotions.Designer.cs">
+      <DependentUpon>201901231449360_Promotions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Configuration\PromotionConfiguration.cs" />
     <Compile Include="Models\OrderCreateResponse.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -290,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812141900052_productDefaultValueUpdates.resx">
       <DependentUpon>201812141900052_productDefaultValueUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901231449360_Promotions.resx">
+      <DependentUpon>201901231449360_Promotions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
