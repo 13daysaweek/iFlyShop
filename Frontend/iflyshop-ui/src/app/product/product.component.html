@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div>{{product.name}}</div>
   <div>{{product.unitPrice | currency }}</div>
   <label>Quantity:
@@ -6,4 +6,13 @@
   </label>
   <button (click)="addItemToCart()" class="btn btn-primary">Add to Cart</button>
   <button (click)="removeItemFromCart()" class="btn btn-secondary">Remove from Cart</button>
-</div>
+</div> -->
+<table class="table">
+  <tr>
+    <td style="width: 200px;">{{product.name}}</td>
+    <td style="width: 50px;">{{product.unitPrice | currency}}</td>
+    <td><input [(ngModel)]="quantity" class="form-control" /></td>
+    <td><button (click)="addItemToCart()" class="btn btn-primary">Add to Cart</button></td>
+    <td><button (click)="removeItemFromCart()" class="btn btn-secondary">Remove from Cart</button></td>
+  </tr>
+</table>
