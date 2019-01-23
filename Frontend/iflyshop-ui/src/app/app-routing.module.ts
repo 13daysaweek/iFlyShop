@@ -5,7 +5,8 @@ import { OrderComponent } from './order/order.component';
 import { PromotionComponent } from './promotion/promotion.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  // { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', component: ProductListComponent },
   { path: 'order', component: OrderComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'promotions', component: PromotionComponent }
