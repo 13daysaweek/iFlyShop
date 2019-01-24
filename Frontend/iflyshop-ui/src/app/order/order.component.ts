@@ -36,6 +36,7 @@ export class OrderComponent implements OnInit {
     private orderService: OrderService) { }
 
   ngOnInit() {
+    this.monitoringService.logPageView('order', '/order');
     this.cart = this.shoppingCartService.getCart();
   }
 }

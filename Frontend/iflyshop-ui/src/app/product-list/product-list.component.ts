@@ -21,6 +21,7 @@ export class ProductListComponent implements OnInit {
     private monitoringService: MonitoringService) { }
 
   ngOnInit() {
+    this.monitoringService.logPageView('products', '/products');
     this.getProducts();
   }
 }
