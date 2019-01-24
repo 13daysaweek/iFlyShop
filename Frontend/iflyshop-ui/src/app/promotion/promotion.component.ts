@@ -26,6 +26,7 @@ export class PromotionComponent implements OnInit {
     private promotionService: PromotionService) { }
 
   ngOnInit() {
+    this.monitoringService.logPageView('promotions', '/promotions');
     this.getPromotions();
   }
 }
